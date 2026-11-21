@@ -28,10 +28,12 @@ jobs:
         run: |
           sed -i 's/gradle-8\.14\.3-bin\.zip/gradle-8.13-bin.zip/' android/gradle/wrapper/gradle-wrapper.properties
           sed -i '/org.gradle.toolchains.foojay-resolver-convention/d' android/settings.gradle
-          echo '--- Gradle wrapper ---'
-          grep distributionUrl android/gradle/wrapper/gradle-wrapper.properties
-          echo '--- Settings plugin section ---'
-          grep -n -C 2 'plugins\|foojay' android/settings.gradle || true
+      - name: Inspect Expo Android module metadata
+        run: |
+          echo '--- Autolinking module resolution ---'
+          npx expo-modules-autolinking resolve --platform android
+          echo '--- Module config files ---'
+          find node_modules -name expo-module.config.json -print
       - name: Build debug APK
         working-directory: android
         run: ./gradlew assembleDebug
