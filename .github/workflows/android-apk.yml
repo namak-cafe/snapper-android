@@ -24,10 +24,14 @@ jobs:
         run: npm install
       - name: Generate Android project
         run: npx expo prebuild --platform android --no-install
-      - name: Pin compatible Gradle version
+      - name: Configure Gradle for preinstalled Java
         run: |
           sed -i 's/gradle-8\.14\.3-bin\.zip/gradle-8.13-bin.zip/' android/gradle/wrapper/gradle-wrapper.properties
+          sed -i '/org.gradle.toolchains.foojay-resolver-convention/d' android/settings.gradle
+          echo '--- Gradle wrapper ---'
           grep distributionUrl android/gradle/wrapper/gradle-wrapper.properties
+          echo '--- Settings plugin section ---'
+          grep -n -C 2 'plugins\|foojay' android/settings.gradle || true
       - name: Build debug APK
         working-directory: android
         run: ./gradlew assembleDebug
