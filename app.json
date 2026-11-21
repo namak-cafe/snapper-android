@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "SNAPPER",
+    "slug": "snapper",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "scheme": "snapper",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.snapper.app"
+    },
+    "android": {
+      "package": "com.snapper.app",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#101828"
+      }
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
